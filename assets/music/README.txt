@@ -1,0 +1,1 @@
+Download any BTS instrumental (e.g. 'Spring Day instrumental', 'Young Forever instrumental') from YouTube as MP3 using a free tool, rename it bg-music.mp3, and place it in this directory (assets/music/).

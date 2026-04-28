@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday Tanisha ✨</title>
+  <meta name="description" content="A cinematic birthday experience for Tanisha's 22nd birthday.">
+
+  <!-- Preconnect and Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300&family=Dancing+Script:wght@400;600;700&family=Lora:ital,wght@0,400;0,500;1,400&display=swap"
+    rel="stylesheet">
+
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+  <!-- Background Elements -->
+  <canvas id="bokehCanvas"></canvas>
+  <div id="fairyLights" class="fairy-lights"></div>
+  <div id="fairyLightsBottom" class="fairy-lights fairy-lights-bottom"></div>
+
+  <!-- Audio Elements -->
+  <audio id="bgMusic" autoplay loop preload="auto">
+    <source src="assets/music/bg-music.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="ambientAudio" loop preload="auto">
+    <source src="assets/music/ambient.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Floating Music Controller -->
+  <div id="musicController" class="music-controller">
+    <div class="vinyl-record">
+      <div class="record-center"></div>
+      <div class="muted-icon" style="display: none;">×</div>
+    </div>
+    <span class="music-label">🎵 BTS</span>
+  </div>
+
+  <!-- Progress Indicator -->
+  <div id="progressIndicator" class="progress-indicator" style="opacity: 0; pointer-events: none;">
+    <!-- Filled dynamically via JS -->
+  </div>
+
+  <!-- Screens Container -->
+  <main id="screensContainer">
+
+    <!-- Screen 1: The Entrance -->
+    <section id="screen-1" class="screen active">
+      <div class="birthday-banner">
+        <!-- 14 pennants spelling H-A-P-P-Y-·-B-D-A-Y -->
+        <div class="pennant" style="--c:#FF4D8D;">H</div>
+        <div class="pennant alt-swing" style="--c:#FFB800;">A</div>
+        <div class="pennant" style="--c:#D4AAFF;">P</div>
+        <div class="pennant alt-swing" style="--c:#FF8FAB;">P</div>
+        <div class="pennant" style="--c:#FFE94D;">Y</div>
+        <div class="pennant alt-swing" style="--c:#FF6B6B;">·</div>
+        <div class="pennant" style="--c:#4DFFB4;">B</div>
+        <div class="pennant alt-swing" style="--c:#E8450A;">D</div>
+        <div class="pennant" style="--c:#B57BFF;">A</div>
+        <div class="pennant alt-swing" style="--c:#FF4D8D;">Y</div>
+        <div class="pennant" style="--c:#FFB800;">✨</div>
+        <div class="pennant alt-swing" style="--c:#D4AAFF;">🌸</div>
+        <div class="pennant" style="--c:#FFE94D;">💜</div>
+        <div class="pennant alt-swing" style="--c:#4DFFB4;">🎂</div>
+      </div>
+      <div class="s1-layout">
+        <div class="s1-text-col">
+          <div class="envelope-container">
+            <div class="envelope">
+              <div class="envelope-flap"></div>
+            </div>
+          </div>
+          <div class="entrance-content">
+            <p class="entrance-subtitle">for someone very special</p>
+            <h1 class="entrance-title">Happy Birthday</h1>
+            <div class="name-wrapper">
+              <h2 class="entrance-name">Tanisha</h2>
+              <div class="emoji-ring">
+                <span style="--i:0;">🎂</span>
+                <span style="--i:1;">🎈</span>
+                <span style="--i:2;">🎊</span>
+                <span style="--i:3;">🌸</span>
+                <span style="--i:4;">✨</span>
+                <span style="--i:5;">🎀</span>
+                <span style="--i:6;">💜</span>
+                <span style="--i:7;">🍂</span>
+              </div>
+            </div>
+            <p class="entrance-age">✦ Turning 22 ✦</p>
+          </div>
+          <div class="letter-quote">
+            <span class="letter-quote-mark">"</span>
+            <p class="letter-quote-text">Some people arrive in your life and rearrange everything — in the best way.</p>
+          </div>
+          <button class="nav-btn" data-target="2">Continue 🎁</button>
+        </div>
+
+        <!-- RIGHT: polaroid video -->
+        <div class="s1-video-col">
+          <div class="s1-polaroid">
+            <!-- Washi tape on top -->
+            <div class="s1-pol-tape"></div>
+
+            <!-- Video -->
+            <div class="s1-pol-video-wrap">
+              <video id="s1Video" src="assets/videos/highlight.mp4" autoplay muted loop playsinline
+                preload="auto"></video>
+              <!-- Warm overlay to blend with page palette -->
+              <div class="s1-pol-overlay"></div>
+            </div>
+
+            <!-- Polaroid bottom strip -->
+            <div class="s1-pol-bottom">
+              <p class="s1-pol-caption">my favourite person 🎀</p>
+              <span class="s1-pol-date">turning 22 ✨</span>
+            </div>
+
+            <!-- Corner stickers -->
+            <span class="s1-pol-sticker s1-ps-tl">🌸</span>
+            <span class="s1-pol-sticker s1-ps-br">🎂</span>
+          </div>
+
+          <!-- Decorative elements around the polaroid -->
+          <div class="s1-pol-deco s1-pd-1">✦</div>
+          <div class="s1-pol-deco s1-pd-2">🎈</div>
+          <div class="s1-pol-deco s1-pd-3">💜</div>
+          <div class="s1-pol-deco s1-pd-4">✨</div>
+        </div><!-- end s1-video-col -->
+      </div><!-- end s1-layout -->
+    </section>
+
+    <!-- Screen 2: A Letter From The Heart -->
+    <section id="screen-2" class="screen">
+      <div class="s2-page">
+
+        <!-- Floating petals background layer -->
+        <div class="s2-petals" aria-hidden="true">
+          <span class="s2-petal" style="--x:5%;  --dur:16s; --delay:0s">🌸</span>
+          <span class="s2-petal" style="--x:15%; --dur:20s; --delay:3s">🌷</span>
+          <span class="s2-petal" style="--x:80%; --dur:14s; --delay:1s">🌸</span>
+          <span class="s2-petal" style="--x:90%; --dur:18s; --delay:4s">🌺</span>
+          <span class="s2-petal" style="--x:50%; --dur:22s; --delay:2s">🌸</span>
+          <span class="s2-petal" style="--x:70%; --dur:15s; --delay:5s">🌷</span>
+        </div>
+
+        <!-- Diary book wrapper -->
+        <div class="s2-diary">
+
+          <!-- Diary spine (left side decoration) -->
+          <div class="s2-spine">
+            <span class="s2-spine-text">Tanisha • 22</span>
+          </div>
+
+          <!-- Diary page (right side — main content) -->
+          <div class="s2-diary-page">
+
+            <!-- Ruled lines background (CSS) -->
+            <div class="s2-ruled-lines" aria-hidden="true"></div>
+
+            <!-- Page top: date + decoration -->
+            <div class="s2-page-top">
+              <div class="s2-page-date">02 May 2026 🌸</div>
+              <div class="s2-page-deco">
+                <span>✦</span>
+                <span class="s2-deco-line"></span>
+                <span>✦</span>
+              </div>
+            </div>
+
+            <!-- Wax seal -->
+            <div class="s2-seal">
+              <div class="s2-seal-circle">
+                <span class="s2-seal-t">T</span>
+              </div>
+              <div class="s2-seal-ribbons">
+                <div class="s2-ribbon s2-rib-l"></div>
+                <div class="s2-ribbon s2-rib-r"></div>
+              </div>
+            </div>
+
+            <!-- Letter salutation -->
+            <h2 class="s2-salutation">Happy Birthday Tan ❤️</h2>
+
+            <!-- Letter body — word reveal happens here -->
+            <div class="s2-letter-body" id="letterBody">
+              <p class="s2-para">I don't even know where to start, because
+                what we have isn't something that can be summed up easily.
+                In just 2 years — and especially these last 10 months —
+                you've become someone I can't imagine my life without.</p>
+
+              <p class="s2-para">You call me a kid, and honestly… I am a
+                kid in front of you. But not because I'm immature — it's
+                because I feel the safest with you. With you, there's no
+                judgment, no ego, no pretending… just a pure, real bond.
+                And that's rare. That's everything.</p>
+
+              <p class="s2-para">But don't get it twisted 😌 just because
+                I'm your "kid" doesn't mean I don't take care of you. In my
+                own way, I babysit you too — with all the care, affection,
+                and love I have for you. It goes both ways, always.</p>
+
+              <p class="s2-para">From those random bus conversations and
+                endless gossip, to studying together (or at least trying to),
+                to exploring Cuttack street food like we own the place… every
+                little moment with you just hits different. And then our
+                late-night talks — the deep ones, the chaotic ones, the ones
+                that somehow mean the most — I cherish all of it more than
+                I can explain.</p>
+
+              <p class="s2-para">You bully me, I ragebait you, and somehow
+                in between all that chaos… we built something so strong, so
+                real, and so irreplaceable.</p>
+
+              <p class="s2-para">Your presence alone makes me happy. You
+                don't even have to do anything — just you being there
+                is enough.</p>
+
+              <p class="s2-para">On your birthday, I just want you to know
+                this — I'm always here. No matter what changes, no matter
+                where life takes us, I hope this bond stays exactly like
+                this… effortless, real, and forever ours.</p>
+
+              <p class="s2-para">Happy Birthday again, aunty… or should
+                I say mom? 😌❤️ Stay the same, because that's exactly who
+                I love the most.</p>
+            </div>
+
+            <!-- Sign off -->
+            <div class="s2-signoff">
+              <div class="s2-signoff-line"></div>
+              <p class="s2-signoff-text">— Your "kid" 🫶</p>
+              <div class="s2-hearts-row">
+                <span>❤️</span><span>🧡</span><span>💛</span>
+                <span>💜</span><span>🩷</span>
+              </div>
+            </div>
+
+
+            <!-- Page number -->
+            <div class="s2-page-num">page 01 of forever</div>
+
+          </div><!-- end s2-diary-page -->
+        </div><!-- end s2-diary -->
+
+        <!-- Continue button -->
+        <button class="nav-btn s2-continue-btn">Continue →</button>
+
+      </div><!-- end s2-page -->
+    </section>
+
+    <!-- Screen 3: Things That Are So Her -->
+    <section id="screen-3" class="screen">
+      <div class="s3-bg-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+        <div class="blob blob-4"></div>
+        <div class="blob blob-5"></div>
+      </div>
+      <div class="screen-inner">
+
+        <div class="s3-header">
+          <h2 class="s3-title">
+            All things Tanisha ✨
+            <span class="twinkle" style="--d:0s; --x:-20px; --y:-10px;">✦</span>
+            <span class="twinkle" style="--d:0.3s; --x:100%; --y:-5px;">✦</span>
+            <span class="twinkle" style="--d:0.6s; --x:-10px; --y:110%;">✦</span>
+            <span class="twinkle" style="--d:0.9s; --x:110%; --y:90%;">✦</span>
+            <span class="twinkle" style="--d:1.2s; --x:50%; --y:-20px;">✦</span>
+            <span class="twinkle" style="--d:1.5s; --x:40%; --y:120%;">✦</span>
+          </h2>
+          <p class="s3-subtitle">tap each card to reveal</p>
+        </div>
+
+        <div class="s3-grid">
+          <div class="s3-card" data-index="0" data-img="assets/images/cards/paris.jpg" data-emoji="🗼"
+            data-question="Dream Destination?" data-answer="Paris, always Paris 💫">
+            <div class="s3-card-inner">
+              <div class="s3-card-front">
+                <span class="s3-emoji">🗼</span>
+                <p class="s3-question">Dream Destination?</p>
+                <span class="s3-tap-hint">tap to reveal</span>
+              </div>
+              <div class="s3-card-revealed-content">
+                <div class="s3-revealed-bg-wrap">
+                  <!-- The image gets cloned to the overlay, and later injected here as background -->
+                  <div class="s3-revealed-bg" style="background-image: url('assets/images/cards/paris.jpg');"></div>
+                  <div class="s3-vignette"></div>
+                </div>
+                <div class="s3-answer-pill">
+                  <span class="s3-answer-emoji">🗼</span>
+                  <p class="s3-answer-text">Paris, always Paris 💫</p>
+                </div>
+                <span class="s3-close-hint">tap to close</span>
+              </div>
+            </div>
+            <div class="s3-shimmer"></div>
+          </div>
+
+          <div class="s3-card" data-index="1" data-img="assets/images/cards/bts.jpg" data-emoji="🎵"
+            data-question="Forever on repeat?" data-answer="BTS — no further questions 💜">
+            <div class="s3-card-inner">
+              <div class="s3-card-front">
+                <span class="s3-emoji">🎵</span>
+                <p class="s3-question">Forever on repeat?</p>
+                <span class="s3-tap-hint">tap to reveal</span>
+              </div>
+              <div class="s3-card-revealed-content">
+                <div class="s3-revealed-bg-wrap">
+                  <div class="s3-revealed-bg" style="background-image: url('assets/images/cards/bts.jpg');"></div>
+                  <div class="s3-vignette"></div>
+                </div>
+                <div class="s3-answer-pill">
+                  <span class="s3-answer-emoji">🎵</span>
+                  <p class="s3-answer-text">BTS — no further questions 💜</p>
+                </div>
+                <span class="s3-close-hint">tap to close</span>
+              </div>
+            </div>
+            <div class="s3-shimmer"></div>
+          </div>
+
+          <div class="s3-card" data-index="2" data-img="assets/images/cards/momo.jpg" data-emoji="🥟"
+            data-question="Soul food?" data-answer="Momo + Butter Chicken + Garlic Naan 🤌">
+            <div class="s3-card-inner">
+              <div class="s3-card-front">
+                <span class="s3-emoji">🥟</span>
+                <p class="s3-question">Soul food?</p>
+                <span class="s3-tap-hint">tap to reveal</span>
+              </div>
+              <div class="s3-card-revealed-content">
+                <div class="s3-revealed-bg-wrap">
+                  <div class="s3-revealed-bg" style="background-image: url('assets/images/cards/momo.jpg');"></div>
+                  <div class="s3-vignette"></div>
+                </div>
+                <div class="s3-answer-pill">
+                  <span class="s3-answer-emoji">🥟</span>
+                  <p class="s3-answer-text">Momo + Butter Chicken + Garlic Naan 🤌</p>
+                </div>
+                <span class="s3-close-hint">tap to close</span>
+              </div>
+            </div>
+            <div class="s3-shimmer"></div>
+          </div>
+
+          <div class="s3-card" data-index="3" data-img="assets/images/cards/dance.jpg" data-emoji="💃"
+            data-question="Favourite Hobby?" data-answer="Dancing — she owns every floor 💃✨">
+            <div class="s3-card-inner">
+              <div class="s3-card-front">
+                <span class="s3-emoji">💃</span>
+                <p class="s3-question">Favourite Hobby?</p>
+                <span class="s3-tap-hint">tap to reveal</span>
+              </div>
+              <div class="s3-card-revealed-content">
+                <div class="s3-revealed-bg-wrap">
+                  <div class="s3-revealed-bg" style="background-image: url('assets/images/cards/dance.jpg');"></div>
+                  <div class="s3-vignette"></div>
+                </div>
+                <div class="s3-answer-pill">
+                  <span class="s3-answer-emoji">💃</span>
+                  <p class="s3-answer-text">Dancing — she owns every floor 💃✨</p>
+                </div>
+                <span class="s3-close-hint">tap to close</span>
+              </div>
+            </div>
+            <div class="s3-shimmer"></div>
+          </div>
+
+          <div class="s3-card" data-index="4" data-img="assets/images/cards/mercedes.jpg" data-emoji="🚗"
+            data-question="Dream ride?" data-answer="Mercedes — because she has taste 👑">
+            <div class="s3-card-inner">
+              <div class="s3-card-front">
+                <span class="s3-emoji">🚗</span>
+                <p class="s3-question">Dream ride?</p>
+                <span class="s3-tap-hint">tap to reveal</span>
+              </div>
+              <div class="s3-card-revealed-content">
+                <div class="s3-revealed-bg-wrap">
+                  <div class="s3-revealed-bg" style="background-image: url('assets/images/cards/mercedes.jpg');"></div>
+                  <div class="s3-vignette"></div>
+                </div>
+                <div class="s3-answer-pill">
+                  <span class="s3-answer-emoji">🚗</span>
+                  <p class="s3-answer-text">Mercedes — because she has taste 👑</p>
+                </div>
+                <span class="s3-close-hint">tap to close</span>
+              </div>
+            </div>
+            <div class="s3-shimmer"></div>
+          </div>
+
+          <div class="s3-card" data-index="5" data-img="assets/images/cards/cooking.jpg" data-emoji="👩‍🍳"
+            data-question="Secret talent?" data-answer="Diet cook & food critic extraordinaire 🍴">
+            <div class="s3-card-inner">
+              <div class="s3-card-front">
+                <span class="s3-emoji">👩‍🍳</span>
+                <p class="s3-question">Secret talent?</p>
+                <span class="s3-tap-hint">tap to reveal</span>
+              </div>
+              <div class="s3-card-revealed-content">
+                <div class="s3-revealed-bg-wrap">
+                  <div class="s3-revealed-bg" style="background-image: url('assets/images/cards/cooking.jpg');"></div>
+                  <div class="s3-vignette"></div>
+                </div>
+                <div class="s3-answer-pill">
+                  <span class="s3-answer-emoji">👩‍🍳</span>
+                  <p class="s3-answer-text">Diet cook & food critic extraordinaire 🍴</p>
+                </div>
+                <span class="s3-close-hint">tap to close</span>
+              </div>
+            </div>
+            <div class="s3-shimmer"></div>
+          </div>
+
+        </div>
+
+        <button class="nav-btn s3-next-btn">Continue →</button>
+
+      </div><!-- end screen-inner -->
+
+      <!-- Burst Animation Overlay -->
+      <div id="s3Overlay" class="s3-overlay">
+        <div class="s3-overlay-backdrop"></div>
+        <div class="s3-overlay-clone-container">
+          <img class="s3-overlay-img" src="" alt="Burst Clone" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Screen 4: Scrapbook Gallery -->
+    <section id="screen-4" class="screen">
+
+      <!-- Decorative washi tape strips across top -->
+      <div class="sb-tape sb-tape-top-left"></div>
+      <div class="sb-tape sb-tape-top-right"></div>
+      <div class="sb-tape sb-tape-bg-1"></div>
+      <div class="sb-tape sb-tape-bg-2"></div>
+      <div class="sb-tape sb-tape-bg-3"></div>
+
+      <div class="sb-header">
+        <h2 class="sb-title color-pulse">Captured Moments 📸</h2>
+        <p class="sb-subtitle">little gallery of memories</p>
+      </div>
+
+      <!-- Tab Bar -->
+      <div class="sb-tabs">
+        <button class="sb-tab active" data-tab="photos">📸 Photos</button>
+        <button class="sb-tab" data-tab="videos">🎞️ Videos</button>
+      </div>
+
+      <!-- PHOTOS TAB -->
+      <div class="sb-tab-content active" id="sb-photos">
+        <div class="sb-masonry">
+
+          <div class="sb-photo-card" style="--tilt: -2.5deg; --delay: 0ms">
+            <div class="sb-tape-corner sb-tc-tl"></div>
+            <img src="assets/photos/photo1.jpg" alt="Memory 1" loading="lazy" />
+            <div class="sb-sticker sb-sticker-1">🌸</div>
+            <p class="sb-caption">our princess ✨</p>
+          </div>
+
+          <div class="sb-photo-card" style="--tilt: 1.8deg; --delay: 60ms">
+            <div class="sb-tape-corner sb-tc-tr"></div>
+            <img src="assets/photos/photo2.jpg" alt="Memory 2" loading="lazy" />
+            <div class="sb-sticker sb-sticker-2">🍂</div>
+            <p class="sb-caption">a moment 🍂</p>
+          </div>
+
+          <div class="sb-photo-card" style="--tilt: -1.2deg; --delay: 120ms">
+            <div class="sb-tape-corner sb-tc-tl"></div>
+            <img src="assets/photos/photo3.jpg" alt="Memory 3" loading="lazy" />
+            <div class="sb-sticker sb-sticker-3">💜</div>
+            <p class="sb-caption">pure joy 💜</p>
+          </div>
+
+          <div class="sb-photo-card" style="--tilt: 2.2deg; --delay: 180ms">
+            <div class="sb-tape-corner sb-tc-tr"></div>
+            <img src="assets/photos/photo4.jpg" alt="Memory 4" loading="lazy" />
+            <div class="sb-sticker sb-sticker-4">⭐</div>
+            <p class="sb-caption">golden girl ⭐</p>
+          </div>
+
+          <div class="sb-photo-card" style="--tilt: -3deg; --delay: 240ms">
+            <div class="sb-tape-corner sb-tc-tl"></div>
+            <img src="assets/photos/photo5.jpg" alt="Memory 5" loading="lazy" />
+            <div class="sb-sticker sb-sticker-5">🎀</div>
+            <p class="sb-caption">she's gorgeous 🎀</p>
+          </div>
+
+          <div class="sb-photo-card" style="--tilt: 1.5deg; --delay: 300ms">
+            <div class="sb-tape-corner sb-tc-tr"></div>
+            <img src="assets/photos/photo6.jpg" alt="Memory 6" loading="lazy" />
+            <div class="sb-sticker sb-sticker-6">🌙</div>
+            <p class="sb-caption">late nights 🌙</p>
+          </div>
+
+          <div class="sb-photo-card" style="--tilt: -1.8deg; --delay: 360ms">
+            <div class="sb-tape-corner sb-tc-tl"></div>
+            <img src="assets/photos/photo7.jpg" alt="Memory 7" loading="lazy" />
+            <div class="sb-sticker sb-sticker-7">🥟</div>
+            <p class="sb-caption">momo runs 🥟</p>
+          </div>
+
+          <div class="sb-photo-card" style="--tilt: 2.8deg; --delay: 420ms">
+            <div class="sb-tape-corner sb-tc-tr"></div>
+            <img src="assets/photos/photo8.jpg" alt="Memory 8" loading="lazy" />
+            <div class="sb-sticker sb-sticker-8">🗼</div>
+            <p class="sb-caption">paris dreams 🗼</p>
+          </div>
+
+          <div class="sb-photo-card" style="--tilt: -2deg; --delay: 480ms">
+            <div class="sb-tape-corner sb-tc-tl"></div>
+            <img src="assets/photos/photo9.jpg" alt="Memory 9" loading="lazy" />
+            <div class="sb-sticker sb-sticker-1">☕</div>
+            <p class="sb-caption">cozy afternoons ☕</p>
+          </div>
+
+          <div class="sb-photo-card" style="--tilt: 1.2deg; --delay: 540ms">
+            <div class="sb-tape-corner sb-tc-tr"></div>
+            <img src="assets/photos/photo10.jpg" alt="Memory 10" loading="lazy" />
+            <div class="sb-sticker sb-sticker-3">🫶</div>
+            <p class="sb-caption">irreplaceable 🫶</p>
+          </div>
+
+        </div><!-- end sb-masonry -->
+      </div><!-- end sb-photos -->
+
+      <!-- VIDEOS TAB -->
+      <div class="sb-tab-content" id="sb-videos">
+        <div class="sb-videos-grid">
+
+          <div class="sb-video-card" style="--tilt: -1.5deg">
+            <div class="sb-tape-corner sb-tc-tl"></div>
+            <div class="sb-video-thumb" data-src="assets/videos/video1.mp4">
+              <video src="assets/videos/video1.mp4" preload="auto" autoplay loop muted playsinline>
+              </video>
+            </div>
+            <p class="sb-caption">Memory #1 🎞️</p>
+            <div class="sb-sticker sb-sticker-2">🎬</div>
+          </div>
+
+          <div class="sb-video-card" style="--tilt: 2deg">
+            <div class="sb-tape-corner sb-tc-tr"></div>
+            <div class="sb-video-thumb" data-src="assets/videos/video2.mp4">
+              <video src="assets/videos/video2.mp4" preload="auto" autoplay loop muted playsinline>
+              </video>
+            </div>
+            <p class="sb-caption">Memory #2 🎞️</p>
+            <div class="sb-sticker sb-sticker-5">✨</div>
+          </div>
+
+        </div>
+      </div><!-- end sb-videos -->
+
+      <!-- LIGHTBOX -->
+      <div class="sb-lightbox" id="sbLightbox">
+        <div class="sb-lightbox-backdrop" id="sbBackdrop"></div>
+        <div class="sb-lightbox-content">
+          <img id="sbLightboxImg" src="" alt="" />
+          <button class="sb-lb-arrow sb-lb-prev" id="sbPrev">‹</button>
+          <button class="sb-lb-arrow sb-lb-next" id="sbNext">›</button>
+          <button class="sb-lb-close" id="sbClose">×</button>
+          <div class="sb-lb-counter" id="sbCounter">1 / 10</div>
+        </div>
+      </div>
+
+      <!-- VIDEO MODAL -->
+      <div class="sb-video-modal" id="sbVideoModal">
+        <div class="sb-vm-backdrop" id="sbVmBackdrop"></div>
+        <div class="sb-vm-content">
+          <video id="sbModalVideo" controls></video>
+          <button class="sb-vm-close" id="sbVmClose">×</button>
+        </div>
+      </div>
+
+      <button class="nav-btn sb-next-btn">Continue →</button>
+
+    </section>
+
+    <!-- Screen 5: Make a Wish -->
+    <section id="screen-5" class="screen">
+      <div class="cake-container">
+        <h2 class="cake-title">🎂 Make a Wish, Tanisha! 🎂</h2>
+        <p class="cake-instruction">Click the cake to blow out the candles 🎂</p>
+        <div class="birthday-cake" id="birthdayCake">
+          <div class="cake-sparkles">
+            <span style="--d:0s; --x:10px; --y:-20px;">✦</span>
+            <span style="--d:0.4s; --x:140px; --y:-30px;">★</span>
+            <span style="--d:0.8s; --x:280px; --y:-15px;">✦</span>
+            <span style="--d:1.2s; --x:-20px; --y:40px;">★</span>
+            <span style="--d:1.6s; --x:320px; --y:35px;">✦</span>
+            <span style="--d:2s; --x:150px; --y:20px;">★</span>
+          </div>
+          <div class="candle-container">
+            <div class="candle">
+              <div class="flame"></div>
+            </div>
+            <div class="candle">
+              <div class="flame"></div>
+            </div>
+            <div class="candle">
+              <div class="flame"></div>
+            </div>
+          </div>
+          <div class="tier top-tier"><span class="stars">✦ ★ ✦</span></div>
+          <div class="tier middle-tier">
+            <span class="stars" style="position:absolute; left:20px;">★</span>
+            <span class="age-text">22</span>
+            <span class="stars" style="position:absolute; right:20px;">★</span>
+          </div>
+          <div class="tier bottom-tier">
+            <span class="cake-banner">Happy Birthday</span>
+            <span class="stars" style="position:absolute; left:30px; top: 10px;">★</span>
+            <span class="stars" style="position:absolute; right:30px; top: 10px;">★</span>
+          </div>
+          <!-- Sprinkles injected via JS -->
+        </div>
+      </div>
+
+      <!-- Hidden Confetti Modal -->
+      <div class="cake-modal" id="cakeModal">
+        <div class="cake-modal-content">
+          <div class="modal-emoji">🎂</div>
+          <h2 class="modal-title">🎉 22 & Absolutely Shining!</h2>
+          <p class="modal-body">
+            Wishing you a year as beautiful, warm, and magical as you are, Tanisha. Here's to Paris trips, BTS nights,
+            momos at midnight, late-night talks, and every little moment that makes life golden. The world is lucky to
+            have you in it. 🥂
+          </p>
+          <div class="emoji-row">🎂 🌸 🗼 💜 🥟 ✨ 🍂 ❤️</div>
+          <button class="nav-btn modal-btn" data-target="6">Everlasting Bond 💌</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="screen-6" class="screen">
+      <div class="s6-bg-parallax"></div>
+      <div class="s6-vignette"></div>
+      
+      <div class="final-content s6-staged">
+        <div class="s6-heart-wrap s6-enter-1">
+          <svg class="outline-heart" viewBox="0 0 24 24" fill="none" stroke="url(#heart-grad)" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round">
+            <defs>
+              <linearGradient id="heart-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#FFB800" />
+                <stop offset="100%" stop-color="#FF4D8D" />
+              </linearGradient>
+            </defs>
+            <path id="heartPath" d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+            <circle class="s6-sparkle" r="0.6" fill="#fff" filter="blur(0.5px)" />
+          </svg>
+        </div>
+        <div class="typewriter-container s6-enter-2">
+          <h1 class="final-typewriter" id="finalTypewriter1"></h1>
+          <h1 class="final-typewriter" id="finalTypewriter2"></h1>
+        </div>
+        <div class="s6-enter-3" style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+          <div class="separator-line" style="animation: none; opacity: 1;"><span>✦</span></div>
+          <h2 class="final-name" style="animation: none; opacity: 1;">Happy Birthday, Tany</h2>
+          <p class="final-compliment" style="animation: none; opacity: 1;">🍂 22 looks incredible on you ❤️</p>
+        </div>
+        <div class="s6-enter-4" style="align-self: flex-end; margin-right: -40px;">
+          <p class="final-signoff" style="animation: none; opacity: 1; margin: 0;">— Your Anshu 🫶</p>
+        </div>
+      </div>
+
+      <div id="s6CinemaOverlay" class="s6-cinema-overlay"></div>
+      <div id="s6Signature" class="s6-signature">Made with ❤️</div>
+    </section>
+
+  </main>
+
+  <!-- Transition Curtain -->
+  <div id="transitionCurtain" class="transition-curtain"></div>
+
+
+
+  <!-- Scripts -->
+  <script src="js/main.js"></script>
+  <script src="js/party.js"></script>
+</body>
+
+</html>
